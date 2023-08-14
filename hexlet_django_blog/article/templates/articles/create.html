@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+{% include 'includes/flash_messages.html' %}
+{% include 'includes/errors_messages.html' %}
+    <form action="{% url 'articles_create' %}" method="post">
+        {% csrf_token %}
+        <table border="1">
+            {{ form }}
+        </table>
+        <input type="submit" value="Создать">
+    </form>
+{% endblock %}

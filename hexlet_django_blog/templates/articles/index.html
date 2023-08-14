@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include 'includes/flash_messages.html' %}
+    <h1>Список статей</h1>
+    <form action="{% url 'articles_index' %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="Введите название" name="q" value="{{ query }}">
+        <input type="submit" value="Поиск">
+    </form>
+    {% for article in articles %}
+        <h2><a href="/articles/{{ article.id }}">{{ article.name }}</a></h2>
+        <div>{{ article.body|slice:":200" }}</div>
+        <a href="{% url 'articles_update' id=article.id %}">Редактировать</a>
+    {% endfor %}
+{% endblock %}
